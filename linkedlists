@@ -1,0 +1,77 @@
+class node:
+    def __init__(self,data):
+        self.val = data
+        self.next = None
+        
+class linkedlist:
+    def __init__(self):
+        self.head = None
+        
+    def insertatstart(self,data):
+        newnode = node(data)
+        newnode.next = self.head
+        self.head = newnode
+        
+    def insertatlast(self,data):
+        curr = self.head
+        newnode = node(data)
+        if curr == None:
+            self.head = newnode
+        else:
+            while curr.next != None:
+                curr= curr.next
+            curr.next = newnode
+        
+    def insertatmiddle(self,data,pos):
+        newnode = node(data)
+        store = pos.next
+        pos.next = newnode
+        newnode.next = store
+
+    def deletefromstart(self):
+        if self.head == None:
+            return None
+        else:
+            self.head = self.head.next
+    
+    def deletefrommiddle(self,pos):
+        curr = self.head
+        if curr == None or curr == pos:
+            self.head = None
+        else:
+            prev = None
+            while curr != pos:
+                 prev = curr
+                 curr = curr.next
+            prev.next = curr.next
+
+    def search(self,key):
+        keynode = None
+        curr =self.head
+        while curr.next != None:
+            if curr.val == key:
+                keynode = curr
+                break
+            else:
+                curr = curr.next
+        return keynode
+        
+    def print_it(self):
+        curr = self.head
+        while curr != None:
+            print(curr.val , end = " ")
+            curr = curr.next
+        print()
+        
+l = linkedlist()
+
+new_val = [1,2,3,4,5,6]
+for i in new_val:
+    l.insertatstart(i)
+l.print_it()
+l.insertatlast(10)
+l.print_it()
+
+posnode = l.search(5)
+l.insertatmiddle(12 , posnode)
+l.print_it()
