@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="task13.css" rel="stylesheet" type="text/css" />
+    <title>Calling Mentor</title>
+    <style>
+      body {
+    background-image: url("call.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100% 100%;
+}
+#userInput {
+    
+}
+#listContainer{
+    
+}
+#email,#name {
+    width: 90%;
+}
+    </style>
+</head>
+<body>
+    <div id="userInput">
+    <form action="####" method="post" id="inputForm">
+    <span id="message"></span><br>
+    <label for="name">Name:</label><br>
+    <input type="text" id="name" name="name"><br>
+    <label for="email">Email:</label><br>
+    <input type="email" id="email" name="email"><br>
+    <input type="submit" id="submit" value="get a call">
+    </form>
+    </div>
+    <div class="listContainer">
+        <ol class="itemList" id="itemsList">
+        </ol>
+    </div>
+<script src="task13.js">
+</script>
+</body>
+</html>
+  <script>
+    const btn = document.querySelector("#submit");
+const nameInput = document.querySelector("#name");
+const emailInput = document.querySelector("#email");
+const msg = document.querySelector("#message");
+const itemList = document.querySelector("#itemsList");
+
+
+function createListItem(element){
+        let item = document.createElement('li');
+        item.setAttribute('class','listItem');
+        
+        let deleteBtn = document.createElement('button');
+        deleteBtn.setAttribute('class','deleteBtn');
+        deleteBtn.setAttribute('style','background-color:red;color: white;');
+        deleteBtn.setAttribute('onclick','deleteUser(this);');
+        deleteBtn.appendChild(document.createTextNode('X'));
+
+        let editBtn = document.createElement('button');
+        editBtn.setAttribute('class','editBtn');
+        editBtn.setAttribute('style','background-color:orange;color: white;');
+        editBtn.setAttribute('onclick','editUser(this);');
+        editBtn.appendChild(document.createTextNode('Edit'));
+
+        item.innerHTML=`${element.name}<span style="padding-left:4%"></span>${element.email}`;
+        item.appendChild(deleteBtn);
+        item.appendChild(editBtn);
+
+        return item;
+}
+
+function deleteUser(obj){
+    console.log('delete',obj.parentElement);
+    let item = obj.parentElement;
+    let userList = JSON.parse(localStorage.getItem('userDetails'));
+    let str = (item.childNodes)[2].textContent;
+    removeUserIfExist(userList,str);
+    localStorage.setItem('userDetails',JSON.stringify(userList));
+}
+    
+  </script>
+  
+</body>
+</html>
