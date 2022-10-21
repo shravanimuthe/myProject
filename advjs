@@ -1,0 +1,100 @@
+1) this refers to the object
+
+this is in the global scope
+
+this.a()
+
+class Student{
+
+   constructor(name,age,phone,marks){
+
+       this.name = name
+
+       this.age = age
+
+       this.phone = phone
+
+       this.marks = marks
+
+   }
+
+   checker(){
+
+       if (this.marks >= 40){
+
+           console.log("you are eligible")
+
+       }
+
+       else{
+
+           console.log("you are not eligible")
+
+       }
+
+   }
+
+ 
+
+}
+
+let ob1 = new Student("shrava" , 17 , 123, 65)
+
+let ob2 = new Student("ram" , 17 , 123, 30)
+
+let ob3 = new Student("ranju" , 18,345,46)
+
+
+ob1.checker()
+
+ob2.checker()
+
+ob3.checker()
+
+
+
+
+class Student{
+
+   constructor(name,age,phone,marks){
+
+       this.name = name
+
+       this.age = age
+
+       this.phone = phone
+
+       this.marks = marks
+
+   }
+
+   checker(){
+
+       if (this.marks >= 40){
+
+           console.log("you are eligible")
+
+       }
+
+       else{
+
+           console.log("you are not eligible")
+
+       }
+
+   }
+
+
+}
+
+let ob1 = new Student("shrava" , 17 , 123, 65)
+
+let ob2 = new Student("ram" , 17 , 123, 30)
+
+let ob3 = new Student("ranju" , 18,345,46)
+
+let iseli = a => (a >= 40) ? 'you are eligible for placements' : 'not eligible for placements'
+console.log(iseli(30))
+ob1.checker()
+console.log(iseli(60))
+ob2.checker()
