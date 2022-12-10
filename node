@@ -1,0 +1,12 @@
+let Multiply = (a,b) => a*b
+
+console.log(Multiply(1,3))
+
+
+const student = {
+
+    firstName: 'ram',
+
+    class: 10
+
+};
