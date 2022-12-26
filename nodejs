@@ -1,0 +1,64 @@
+//chat app js code
+const express = require("express");
+const bodyParser = require("body-parser");
+
+const loginRoutes = require("./routes/loginRoute");
+const messageRoutes = require("./routes/message");
+
+const app = express();
+
+app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use(loginRoutes);
+app.use(messageRoutes);
+
+app.use((req, res, next) => {
+  res.status(404).send("<h1>Page Not Found</h1>");
+});
+
+app.listen(3000);
+//login
+const express = require("express");
+
+const router = express.Router();
+
+router.get("/login", (req, res, next) => {
+  res.send(
+    `<form onsubmit="localStorage.setItem('username', document.getElementById('username').value)" action="/login" method="POST"><label>Username </label><input id="username" type="text" name="name"><button type="submit">Submit</button></form>`
+  );
+});
+
+router.post("/login", (req, res, next) => {
+  res.redirect("/chatroom");
+});
+
+module.exports = router;
+//text
+const express = require("express");
+const fs = require("fs");
+const router = express.Router();
+
+router.get("/chatroom", (req, res, next) => {
+  fs.readFile("msg.txt", (err, data) => {
+    if (err) {
+      console.log(err);
+      data = "no data exists";
+    }
+
+    res.send(`${data}<form action="/chatroom" onsubmit= "document.getElementById('message').value=localStorage.getItem('username')" method="POST">
+        <input id="msg" name="msg" type="text" placeHolder="message">
+        <input type="hidden" name="username" id="message">
+        <button type="submit">send</button></form>`);
+  });
+});
+
+router.post("/chatroom", (req, res, next) => {
+  fs.writeFile(
+    "msg.txt",
+    `${req.body.username} : ${req.body.msg} `,
+    { flag: "a" },
+    (err) => (err ? console.log(err) : res.redirect("/chatroom"))
+  );
+});
+
+module.exports = router;
